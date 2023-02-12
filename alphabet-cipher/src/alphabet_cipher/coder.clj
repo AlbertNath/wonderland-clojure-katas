@@ -13,16 +13,14 @@
   "Función inversa a la anterior"
   [idx] (char (+ idx 97)))
 
-
 (defn encode [keyword message]
-  (str map-indexed #() message))
-
-(defn test-map [word, key]
-  (str map-indexed #((int-to-char ((char-to-int (nth word %1)) +
-                                   (char-to-int (nth key (mod %1 (count key))))))) word))
-
+    (apply str (map-indexed (fn [idx itm]
+               (int-to-char (mod (+ (char-to-int (nth message idx))
+                                    (char-to-int (nth keyword (mod idx (count keyword))))) 26))) message)))
 (defn decode [keyword message]
-  "decodeme")
+  (apply str (map-indexed (fn [idx itm]
+               (int-to-char (mod (- (char-to-int (nth message idx))
+                                    (char-to-int (nth keyword (mod idx (count keyword))))) 26))) message)))
 
 (defn decipher [cipher message]
   "decypherme")
