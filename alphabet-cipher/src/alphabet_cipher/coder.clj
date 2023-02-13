@@ -35,8 +35,7 @@
   la función  inversa de `mod` es  $a + x =  0 mod m$ (aunque  probablemente hay
   formas más elegantes)."
   [cipher message]
-  (apply str (set (map-indexed (fn [idx _]
+  (apply str (distinct (apply str (map-indexed (fn [idx _]
                                  (int-to-char (mod (+ (- 26 (char-to-int (nth message idx)))
-                                                      (char-to-int (nth cipher idx))) 26))) message))))
-
+                                                      (char-to-int (nth cipher idx))) 26))) message)))))
 (decipher "opkyfipmfmwcvqoklyhxywgeecpvhelzg" "thequickbrownfoxjumpsoveralazydog")
